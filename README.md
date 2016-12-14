@@ -1,0 +1,1 @@
+# manobra_haskell
