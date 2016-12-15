@@ -13,7 +13,7 @@ import Data.Char
 path = "database.txt"
 
 -- DEFININDO UM TIPO DE DADOS PARA AS CARACTERÍSTICAS DOS CARROS
--- CODIGO DO PROPRIETÁRIO, MODELO, PLACA, TIPO DE VEICULO
+-- MODELO, PLACA, CODIGO DO PROPRIETÁRIO, TIPO DE VEICULO
 data Veiculo = Veiculo String String Int Int deriving Show
 
 --CLASSE MESTRA PARA CRIAÇÃO DE OUTRAS "CLASSES" E MÉTODOS 
@@ -87,6 +87,15 @@ ler modeloDoArquivo = do
 cadastro :: Veiculo -> IO()
 cadastro vazio = putStrLn "Sem Veiculos!"
 cadastro p = appendFile path ((encode p) ++ "\n")
+
+
+-- buscarTodos :: [Veiculo]
+-- buscarTodos = do
+--     x <- readFile path
+--     arrayLines = quebra '\n' x
+--     return (arrayVeiculos arrayLines) where
+--         arrayVeiculos [] = []
+--         arrayVeiculos (h:t) = (quebra ',' h):arrayVeiculos t
 
 buscarTodos :: IO() 
 buscarTodos = do
@@ -219,7 +228,7 @@ estacionamento = do
         resposta = read respostas
         
     if (resposta == 1) then
-        opcao2
+        cadastrar_veiculo
     else if (resposta == 3) then
         alterar
     else if (resposta == 4) then
@@ -237,19 +246,14 @@ opcao2 = do
     buscar busca
     estacionamento
 
---opcao1 = do
-	--putStrLn "Digite o modelo do Veiculo:"
-    --modelo <- getLine
-    --putStrLn "Digite a Placa do Veiculo:"
-    --placa <- getLine
-    --putStrLn "Digite o Código do Proprietario:"
-    --codPros <- getLine
-    --putStrLn "Digite o Tipo do Veiculo [1-Pequeno 2- Médio 3-Grande]:"
-    --tipos <- getLine   
-
-    --let
-     --   codPro = read codPros
-      --  tipo = read tipos
-      
-    --cadastro (Veiculo modelo placa codPro tipo)
-   	--estacionamento
+cadastrar_veiculo = do
+    putStrLn "Digite o modelo do Veiculo:"
+    modelo <- getLine
+    putStrLn "Digite a placa do Veiculo:"
+    placa <- getLine
+    putStrLn "Digite o Código do Proprietario:"
+    codPros <- getLine
+    putStrLn "Digite o Tipo do Veiculo [1-Pequeno 2- Médio 3-Grande]:"
+    tipos <- getLine
+    cadastro (Veiculo modelo placa (read codPros) (read tipos))
+    estacionamento
