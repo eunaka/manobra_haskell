@@ -14,7 +14,7 @@ path = "database.txt"
 
 -- DEFININDO UM TIPO DE DADOS PARA AS CARACTERÍSTICAS DOS CARROS
 -- MODELO, PLACA, CODIGO DO PROPRIETÁRIO, TIPO DE VEICULO
-data Veiculo = Veiculo String String Int Int deriving Show
+data Veiculo = Veiculo String String Int Int | Vazio deriving Show
 
 --CLASSE MESTRA PARA CRIAÇÃO DE OUTRAS "CLASSES" E MÉTODOS 
 class Mestra a where
@@ -49,7 +49,6 @@ quebra s a = [k] ++ quebra s (drop(length k + 1) a) where
     k = takeWhile (\x -> x /= s) a
 
 instance Mestra Veiculo where
-    vazio = Veiculo "" "" 0 0
     propriedades p = ["modelo", "placa", "codPro", "tipo"]
     setProp "modelo" (Veiculo modelo placa codPro tipo) modelo2 = Veiculo modelo2 placa codPro tipo
     setProp "placa" (Veiculo modelo placa codPro tipo) placa2 = Veiculo modelo placa2 codPro tipo 
@@ -85,7 +84,7 @@ ler modeloDoArquivo = do
 --Exemplo
 
 cadastro :: Veiculo -> IO()
-cadastro vazio = putStrLn "Sem Veiculos!"
+cadastro Vazio = putStrLn "Sem Veiculos!"
 cadastro p = appendFile path ((encode p) ++ "\n")
 
 
