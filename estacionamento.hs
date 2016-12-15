@@ -180,33 +180,9 @@ loop p = do
 
 
 --OPÇÕES DO menu
-
-entrada = do
-    putStrLn "\t\t MANOBRA HASKELL"
-    putStrLn "\nCAIXA "
-    putStr "Digite a placa do Veiculo: "   
-    putStrLn "Digite 0 para finalizar"
-    placa <- getLine 
-    
-    menu
-
     
     
-menu = do
-    putStrLn "\t\t\t\t MANOBRA HASKELL"
-    putStrLn "\nDigite 1 para ESTACIONAMENTO"
-    putStrLn "Digite 2 para ENTRADA"
-    num <- getLine
-    
-    let 
-        n = read num
-    
-    if(n == 1) then 
-        estacionamento
-    else if(n==2) then
-        entrada
-    else
-        menu
+menu = estacionamento
 
         
     
@@ -221,7 +197,6 @@ estacionamento = do
     putStr "\t Digite 5 - Buscar Todos os Veiculos \n"
     putStr "\t Digite 6 para sair \n"
     respostas <- getLine
-    putStrLn respostas
     
     let
         resposta = read respostas
